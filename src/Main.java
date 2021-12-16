@@ -1,5 +1,4 @@
-import java.util.ArrayList;
-import java.util.List;
+
 import java.util.Scanner;
 
 public class Main {
@@ -42,7 +41,9 @@ public class Main {
                     manager.editHumanByID(idEdit);
                     break;
                 case 6:
-
+                    System.out.println("Arrange list by Score: ");
+                    manager.arrangeListByAverageScore();
+                    break;
                 case 7:
                     System.out.println("Sum of score = " + manager.sumOfScore());
                     break;

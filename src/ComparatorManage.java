@@ -1,16 +1,16 @@
 import java.util.Comparator;
 
-public class ComparatorManage implements Comparator<Student> {
+public class ComparatorManage implements Comparator<Human> {
 
     public ComparatorManage() {
     }
 
     @Override
-    public int compare(Student o1, Student o2) {
-        if (o1 != null && o2 != null) {
-            if (o1.getAverageScore() > o2.getAverageScore()) {
+    public int compare(Human o1, Human o2) {
+        if (o1 instanceof Student && o2 instanceof Student) {
+            if (((Student)o1).getAverageScore() > ((Student)o2).getAverageScore()) {
                 return -1;
-            } else if (o1.getAverageScore() < o2.getAverageScore()){
+            } else if (((Student)o1).getAverageScore() < ((Student)o2).getAverageScore()){
                 return 1;
             } else{
                 return 0;

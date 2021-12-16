@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
+import java.util.Comparator;
 import java.util.Scanner;
 
 public class Manager implements Manage {
@@ -86,8 +86,8 @@ public class Manager implements Manage {
     public void editHumanByID(int id) {
         boolean check = false;
         for (int i = 0; i < humanList.size(); i++) {
-            if (humanList.get(i).getIdHuman() == id){
-                humanList.set(i,create());
+            if (humanList.get(i).getIdHuman() == id) {
+                humanList.set(i, create());
                 humanList.get(i).setId(id);
                 check = true;
                 Human.id--;
@@ -100,26 +100,47 @@ public class Manager implements Manage {
         display(); // Hoặc không cần tùy
     }
 
-    @Override
-    public void arrangeListByAverageScore() {
-        ComparatorManage comparatorManage = new ComparatorManage();
-//        Arrays.sort(humanList.toArray(),comparatorManage);
-    }
-
 //    @Override
 //    public void arrangeListByAverageScore() {
-//        ComparatorManage comparatorManage = new ComparatorManage();
-//        Arrays.sort(new ArrayList[]{humanList},comparatorManage);
+//        Human[] newHumanList = new Human[humanList.size()];
+//        for (int i = 0; i < humanList.size(); i++) {
+//            newHumanList[i] = humanList.get(i);
+//        }
+//        Comparator<Human> comparator = new ComparatorManage();
+//        Arrays.sort(newHumanList,comparator);
+//
+//        for (Human human : newHumanList) {
+//            System.out.println(human);
+//        }
 //    }
+
+    @Override
+    public void arrangeListByAverageScore() {
+        Human[] newHumanList = new Human[humanList.size()];
+        for (int i = 0; i < humanList.size(); i++) {
+            newHumanList[i] = humanList.get(i);
+        }
+        Comparator<Human> comparator = new ComparatorManage();
+        Arrays.sort(newHumanList,comparator);
+
+        for (int i = 0; i < newHumanList.length; i++) {
+            humanList.set(i,newHumanList[i]);
+            System.out.println(newHumanList[i]);
+        }
+    }
 
     @Override
     public double sumOfScore() {
         double sum = 0;
-        for (Human human: humanList) {
-            if ( human instanceof Student){
-                sum +=((Student) human).getAverageScore();
+        for (Human human : humanList) {
+            if (human instanceof Student) {
+                sum += ((Student) human).getAverageScore();
             }
         }
         return sum;
+    }
+
+    public void display2(){
+
     }
 }
