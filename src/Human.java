@@ -2,7 +2,7 @@ public class Human {
     private String name;
     private int age;
 
-    private static int id = 1;
+    static int id = 1;
     private int idHuman;
 
     public Human() {

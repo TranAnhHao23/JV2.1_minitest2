@@ -18,9 +18,9 @@ public class Manager implements Manage {
     }
 
     public Human create() {
-        System.out.println("Nhập học sinh hay người");
-        System.out.println("1. Người");
-        System.out.println("2. Học sinh");
+        System.out.println("Human or Student");
+        System.out.println("1. Human");
+        System.out.println("2. Student");
         int choice = sc.nextInt();
         String name;
         int age;
@@ -29,18 +29,18 @@ public class Manager implements Manage {
         sc.nextLine();
         switch (choice) {
             case 1:
-                System.out.print("Nhập tên học sinh: ");
+                System.out.print("Human name: ");
                 name = sc.nextLine();
-                System.out.print("Nhập tuổi: ");
+                System.out.print("Human age: ");
                 age = sc.nextInt();
                 humanSample = new Human(name, age);
                 break;
             case 2:
-                System.out.print("Nhập tên học sinh: ");
+                System.out.print("Student name: ");
                 name = sc.nextLine();
-                System.out.print("Nhập tuổi: ");
+                System.out.print("Student age: ");
                 age = sc.nextInt();
-                System.out.print("Nhập điểm trung bình: ");
+                System.out.print("Average Score: ");
                 averageScore = sc.nextDouble();
                 humanSample = new Student(name, age, averageScore);
                 break;
@@ -59,6 +59,7 @@ public class Manager implements Manage {
         for (Human human : humanList) {
             if (human.getIdHuman() == id) {
                 System.out.println(human);
+                check = true;
             }
         }
         if (!check) {
@@ -68,10 +69,15 @@ public class Manager implements Manage {
 
     @Override
     public void deleteHuman(int id) {
+        boolean check = false;
         for (int i = 0; i < humanList.size(); i++) {
             if (humanList.get(i).getIdHuman() == id) {
                 humanList.remove(i);
+                check = true;
             }
+        }
+        if (!check) {
+            System.out.println("Student not on this list");
         }
         display();
     }
@@ -79,16 +85,25 @@ public class Manager implements Manage {
     @Override
     public void editHumanByID(int id) {
         boolean check = false;
-        for (Human human : humanList) {
-            if (human.getIdHuman() == id) {
-                human = create();
-                human.setId(id);
+        for (int i = 0; i < humanList.size(); i++) {
+            if (humanList.get(i).getIdHuman() == id){
+                humanList.set(i,create());
+                humanList.get(i).setId(id);
+                check = true;
+                Human.id--;
+                break;
             }
         }
         if (!check) {
             System.out.println("Student not on this list");
         }
         display(); // Hoặc không cần tùy
+    }
+
+    @Override
+    public void arrangeListByAverageScore() {
+        ComparatorManage comparatorManage = new ComparatorManage();
+        Arrays.sort(humanList.toArray(),comparatorManage);
     }
 
 //    @Override
