@@ -103,7 +103,7 @@ public class Manager implements Manage {
     @Override
     public void arrangeListByAverageScore() {
         ComparatorManage comparatorManage = new ComparatorManage();
-        Arrays.sort(humanList.toArray(),comparatorManage);
+//        Arrays.sort(humanList.toArray(),comparatorManage);
     }
 
 //    @Override
